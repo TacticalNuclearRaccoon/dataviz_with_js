@@ -1,0 +1,28 @@
+body {
+  font-family: sans-serif;
+}
+
+div.content {
+  display: flex;
+  flex-flow: column;
+  gap: 0.2em;
+}
+
+div.item {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+div.name {
+  width: 10em;
+  text-align: right;
+}
+
+div.bar {
+  width: 10em;
+  background-color: LightGray;
+  color: black;
+  padding: 0.2em;
+  text-align: left;
+}
