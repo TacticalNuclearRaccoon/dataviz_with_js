@@ -21,8 +21,8 @@ div.name {
 
 div.bar {
   width: 10em;
-  background-color: LightGray;
+  background-color: lightpink;
   color: black;
   padding: 0.2em;
-  text-align: left;
+  text-align: right;
 }
