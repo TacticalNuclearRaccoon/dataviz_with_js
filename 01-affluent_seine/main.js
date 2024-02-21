@@ -5,7 +5,6 @@ if (chartDom === null) {
 }
 
 const source = [
-  ["nom", "longueur"],
   ["Marne", 514.0],
   ["Oise", 341.1],
   ["Yonne", 292.3],
@@ -23,8 +22,9 @@ const source = [
   ["Voulzie", 43.9],
   ["Almont", 42.1],
   ["Orvin", 38.1],
+  ["nom", "longueur"],
 ];
-
+source.reverse();
 const myChart = echarts.init(chartDom);
 const option = {
   dataset: {
@@ -46,4 +46,4 @@ const option = {
   ],
 };
 
-option && myChart.setOption(option);
+myChart.setOption(option);
