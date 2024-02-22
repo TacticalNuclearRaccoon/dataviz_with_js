@@ -1,7 +1,37 @@
 // @ts-nocheck
 const main = async () => {
-  const csv = await d3.dsv(",", "./river_debit.csv");
+  const query = `
+  #Affluent de la Seine
+  SELECT ?river ?riverLabel ?length ?debit
+  WHERE
+  {
+    ?river wdt:P403 wd:Q1471. # se jette dans la seine
+    ?river wdt:P2043 ?length. # a pour longueur
+    ?river wdt:P2225 ?debit. # a pour debit
+    SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". } # Helps get the label in your language, if not, then en language
+  }
+  ORDER BY DESC(?length)
+`;
 
+  wikidataUrl = "https://query.wikidata.org/bigdata/namespace/wdq/sparql";
+  const url = wikidataUrl + "?query=" + encodeURIComponent(query);
+
+  const response = await fetch(url, {
+    headers: {
+      Accept: "application/sparql-results+json",
+    },
+  });
+  const json = await response.json();
+  const csv = json.results.bindings.map((row) => {
+    const result = {};
+    for (const key of Object.keys(row)) {
+      result[key] = row[key].value;
+    }
+    return result;
+  });
+  console.log("csv: ", csv);
+
+  const duration = 1000;
   const button = document.querySelector("button.switch");
 
   const getSource = (csv, state) => {
@@ -20,15 +50,17 @@ const main = async () => {
     button.innerHTML =
       state === "length" ? "Voir les débits" : "Voir les longueurs";
 
-    d3.select("p.unit").text(
-      state === "length" ? "Longueur en km" : "Debit en m3/s"
-    );
+    d3.select("p.unit")
+      .style("opacity", 0)
+      .transition()
+      .duration(duration)
+      .style("opacity", 1)
+      .text(state === "length" ? "Longueur en km" : "Debit en m3/s");
     update(source, state);
   });
 
   const update = (source, state) => {
     const height = 1.8;
-    const duration = 1000;
     const backgroundColor = state === "length" ? "cadetblue" : "blue";
     const coef = state === "length" ? 1 : 3;
 
