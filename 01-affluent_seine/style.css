@@ -33,5 +33,17 @@ div.bar {
   background-color: lightpink;
   color: black;
   padding: 0.2em;
+  text-align: right;
+}
+
+div.bar2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10em;
+
+  background-color: rgb(182, 211, 255);
+  color: blue;
+  padding: 0.2em;
   text-align: left;
 }

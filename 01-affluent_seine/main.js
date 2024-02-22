@@ -1,9 +1,7 @@
 // @ts-nocheck
 const main = async () => {
   const csv = await d3.dsv(",", "./river_debit.csv");
-  const source = csv.map((line) => {
-    return [line.riverLabel, line.length, line.debit];
-  });
+  const source = csv.map((line) => [line.riverLabel, line.length, line.debit]);
 
   const height = 1.8;
   const duration = 1000;
@@ -32,6 +30,20 @@ const main = async () => {
     .transition()
     .duration(duration)
     .style("width", (d) => `${d[1] / 16}em`)
+    .style("opacity", 1);
+
+  d3.select("div.content")
+    .selectAll("div.bar2")
+    .data(source)
+    .join("div")
+    .classed("bar2", true)
+    .style("width", 0)
+    .style("transform", (d, i) => `translate(10.5em, ${i * height}em)`)
+    .text((d) => d[2])
+    .style("opacity", 0)
+    .transition()
+    .duration(duration)
+    .style("width", (d) => `${d[2] / 16}em`)
     .style("opacity", 1);
 };
 
