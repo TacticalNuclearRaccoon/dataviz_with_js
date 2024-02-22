@@ -29,33 +29,35 @@ const main = async () => {
   const update = (source, state) => {
     const height = 1.8;
     const duration = 1000;
+    const backgroundColor = state === "length" ? "cadetblue" : "blue";
+    const coef = state === "length" ? 1 : 3;
 
     d3.select("div.content")
       .selectAll("div.name")
-      .data(source, (d) => d.name)
+      .data(source, (d) => d[0])
       .join("div")
       .classed("name", true)
-      .style("transform", (d, i) => `translate(0, ${i * height}em)`)
-      .style("opacity", 0)
       .text((d) => d[0])
       .transition()
       .duration(duration)
-      .style("opacity", 1);
+      .style("top", (d, i) => `${i * height}em`);
 
     d3.select("div.content")
       .selectAll("div.bar")
-      .data(source, (d) => d.name)
+      .data(source, (d) => d[0])
       .join("div")
       .classed("bar", true)
-      .style("width", 0)
-      .style("transform", (d, i) => `translate(10.5em, ${i * height}em)`)
-      .style("background-color", state === "length" ? "lightpink" : "lightblue")
-      .text((d) => d[1])
-      .style("opacity", 0)
+      .html(
+        (d) =>
+          `<span class="${d[1] * coef < 30 ? "outside" : ""}" style="left: ${
+            (d[1] * coef) / 16 + 0.5
+          }em">${d[1]}</span>`
+      )
       .transition()
       .duration(duration)
-      .style("width", (d) => `${d[1] / 16}em`)
-      .style("opacity", 1);
+      .style("background-color", backgroundColor)
+      .style("top", (d, i) => `${i * height}em`)
+      .style("width", (d) => `${(d[1] * coef) / 16}em`);
   };
 
   const source = getSource(csv, state);

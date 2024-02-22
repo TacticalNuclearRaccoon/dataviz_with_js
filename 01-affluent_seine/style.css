@@ -8,12 +8,6 @@ div.content {
   height: 30em;
 }
 
-div.item {
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
-}
-
 div.name {
   position: absolute;
   top: 0;
@@ -27,13 +21,18 @@ div.name {
 div.bar {
   position: absolute;
   top: 0;
-  left: 0;
-  width: 10em;
+  left: 10.5em;
 
-  background-color: lightpink;
-  color: black;
+  width: 0;
+  color: white;
   padding: 0.2em;
   text-align: right;
+}
+
+div.bar span.outside {
+  position: relative;
+  color: black;
+  left: 2.5em;
 }
 
 button {
