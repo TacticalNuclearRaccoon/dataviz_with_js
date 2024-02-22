@@ -18,24 +18,14 @@ const source = [
   ["Orvin", 38.1],
 ];
 
-const elt = document.querySelector("div.content");
-if (elt === null) {
-  throw new Error("cannot find div.content element");
-}
+d3.select("div.content")
+  .selectAll("div.name")
+  .data(source)
+  .join("div")
+  .text((d) => d[0]);
 
-let templates = "";
-for (const item of source) {
-  const name = item[0];
-  /** @type number */
-  // @ts-ignore
-  const length = item[1];
-  const template = `
-  <div class="item">
-    <div class="name">${name}</div>
-    <div class="bar" style="width: ${length / 16}em">${length}</div>
-  </div>
-  `;
-  templates = templates + template;
-}
-
-elt.innerHTML = templates;
+d3.select("div.content")
+  .selectAll("div.bar")
+  .data(source)
+  .join("div")
+  .text((d) => d[1]);
