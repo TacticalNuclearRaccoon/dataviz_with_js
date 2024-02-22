@@ -29,6 +29,17 @@ div.bar {
   text-align: right;
 }
 
+div.textbar {
+  position: absolute;
+  top: 0;
+  left: 10.5em;
+
+  width: 0;
+  color: white;
+  padding: 0.2em;
+  text-align: right;
+}
+
 div.bar span.outside {
   position: relative;
   color: black;
