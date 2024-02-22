@@ -4,8 +4,6 @@
 
 ![](https://i.imgur.com/Bx4AkTJ.png)
 
-![](https://img.shields.io/github/stars/pandao/editor.md.svg) ![](https://img.shields.io/github/forks/pandao/editor.md.svg) ![](https://img.shields.io/github/tag/pandao/editor.md.svg) ![](https://img.shields.io/github/release/pandao/editor.md.svg) ![](https://img.shields.io/github/issues/pandao/editor.md.svg) ![](https://img.shields.io/bower/v/editor.md.svg)
-
 ## Prerequisites
 
 - node
@@ -27,3 +25,22 @@ npm i
 ```
 
 to fetch it from the npm package manager.
+
+## Data and exercices
+
+01-affluent_seine folder includes example exercices on data about the rivers joining the Seine river (Paris/France)
+
+This data was fetched from wikiData with the following SPARQL query:
+
+```
+#Affluent de la Seine
+SELECT ?river ?riverLabel ?length ?debit
+WHERE
+{
+  ?river wdt:P403 wd:Q1471. # se jette dans la seine
+  ?river wdt:P2043 ?length. # a pour longueur
+  ?river wdt:P2225 ?debit. # a pour debit
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". } # Helps get the label in your language, if not, then en language
+}
+ORDER BY DESC(?length)
+```
