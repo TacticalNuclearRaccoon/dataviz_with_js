@@ -3,9 +3,9 @@ body {
 }
 
 div.content {
-  display: flex;
-  flex-flow: column;
-  gap: 0.2em;
+  position: relative;
+  width: 50em;
+  height: 30em;
 }
 
 div.item {
@@ -15,12 +15,21 @@ div.item {
 }
 
 div.name {
+  position: absolute;
+  top: 0;
+  left: 0;
+
   width: 10em;
   text-align: right;
+  padding: 0.2em;
 }
 
 div.bar {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 10em;
+
   background-color: lightpink;
   color: black;
   padding: 0.2em;

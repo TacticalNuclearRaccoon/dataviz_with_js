@@ -1,3 +1,4 @@
+//@ts-nocheck
 const source = [
   ["Marne", 514],
   ["Oise", 341.1],
@@ -18,14 +19,21 @@ const source = [
   ["Orvin", 38.1],
 ];
 
+const height = 1.8;
+
 d3.select("div.content")
   .selectAll("div.name")
   .data(source)
   .join("div")
+  .classed("name", true)
+  .style("transform", (d, i) => `translate(0,${i * height}em)`)
   .text((d) => d[0]);
 
 d3.select("div.content")
   .selectAll("div.bar")
   .data(source)
   .join("div")
+  .classed("bar", true)
+  .style("width", (d) => `${d[1] / 16}em`)
+  .style("transform", (d, i) => `translate(10.5em, ${i * height}em`)
   .text((d) => d[1]);
