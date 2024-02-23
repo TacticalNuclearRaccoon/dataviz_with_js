@@ -1,0 +1,53 @@
+body {
+  font-family: sans-serif;
+}
+
+div.content {
+  position: relative;
+  width: 50em;
+  height: 30em;
+}
+
+div.name {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 10em;
+  text-align: right;
+  padding: 0.2em;
+}
+
+div.bar {
+  position: absolute;
+  top: 0;
+  left: 10.5em;
+
+  width: 0;
+  color: white;
+  padding: 0.2em;
+  text-align: right;
+}
+
+div.textbar {
+  position: absolute;
+  top: 0;
+  left: 10.5em;
+
+  width: 0;
+  color: white;
+  padding: 0.2em;
+  text-align: right;
+}
+
+div.bar span.outside {
+  position: relative;
+  color: black;
+  left: 2.5em;
+}
+
+button {
+  cursor: pointer;
+  width: 15em;
+  padding: 0.5em 1em;
+}
